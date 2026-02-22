@@ -1,27 +1,26 @@
-eighteen feb did so many NIIT tasks
-in that used cloud formation by creating a template so its simple i just have 
-to create a yaml file and put the cloud formation template which will create
-or operate any aws resource which we want. 
-so I created S3 temp which clearly creates a S3 bucket, same for ECtwo sec 
-group 
+Feb twotwo journal
+task was to build api in mac terminal and pick the link and it should show
+today's date
 
-but while creating the sec group elatic ip and public ipv4 creation
-i have to provide the ami image id and subnet id in that yaml file
+so basically three steps first is choose a language it gave steps for python 
+but learnt it can be done using nodejs and javaspringboot too
+and also the link output shows in json file format
 
-so it will create the and manage the resources which helps us error free and 
-time saving. 
+we can test whether this API works using browser postman curl command
 
-next was to install ansible 
-and then need to create a vagrant file which give by niit was a failure and
-old file so i was unable to up the vagrant then all the remaining task went 
-unperformed lik creating invetory and putting the adresses and ansible play
-book to install the packages so need to try it seperately. 
+anyway python already installed so verify it using version command
 
-then i knew nano editor very well but i forgot now recalled
-ctrl o is save then click enter 
-then ctrl x is exit from the file 
+then create a direcotry for restapi then go inside the directory using cd
+ then create a virtual environment using venv venv
 
-then one more mistake in yaml file i created the directory and didn't put the 
-yaml insite the file so it didn't work 
+and then activate it 
+
+
+now create a file where we can put the python code and then run the api 
+command uvicorn main app reload
+
+then we can open the browser it will show todays date
+
+
 
 
