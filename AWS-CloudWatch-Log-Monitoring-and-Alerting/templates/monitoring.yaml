@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudWatch Log Monitoring and Alerting
+
+Parameters:
+
+  EmailAddress:
+    Type: String
+    Description: Email address for SNS notifications
+
+Resources:
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: ApplicationLogs
+      RetentionInDays: 7
+
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: CloudWatchAlerts
+
+  EmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Protocol: email
+      Endpoint: !Ref EmailAddress
+      TopicArn: !Ref SNSTopic
+
+  MetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      LogGroupName: !Ref LogGroup
+      FilterPattern: "ERROR"
+      MetricTransformations:
+        - MetricNamespace: Application
+          MetricName: ErrorCount
+          MetricValue: "1"
+
+  Alarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: ApplicationErrorAlarm
+      Namespace: Application
+      MetricName: ErrorCount
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref SNSTopic
+
+Outputs:
+
+  LogGroup:
+    Value: !Ref LogGroup
+
+  TopicArn:
+    Value: !Ref SNSTopic
